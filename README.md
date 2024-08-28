@@ -15,15 +15,11 @@ Currently, our goal is to expand on what was completed for the project in Spring
 * Insert how to run the program here
 
 ## Authors
-@KitsuneHorizon
-
-@bbgriffin
-
-@beckyHuck
-
-@k-longe
-
-@ryanjeakins
+* KitsuneHorizon (Shayra Amador)
+* bbgriffin (Bethany Griffin)
+* beckyHuck (Rebecca Huck)
+* k-longe (Kristina Longe)
+* ryanjeakins (Ryan Eakins)
 
 ## Acknowledgements
 * Insert acknowledgements here
