@@ -6,13 +6,21 @@ Currently, our goal is to expand on what was completed for the project in Spring
 
 ## Getting Started
 ### Dependencies
-* Any identified dependencies will be entered here
+* Tesseract-OCR executable (https://tesseract-ocr.github.io/tessdoc/Installation.html)
+* pillow Python Package
+* openpyxl Python Package
 
 ### Installing
 * If using the terminal, clone the repo in your desired directory using `git clone Insert HTTPS/SSH link here`
+* You can also clone the repo using GitHub Desktop. 
 
 ### Executing program
 * Insert how to run the program here
+
+### Repository Directory
+* GRU's-Minions-Capstone
+  * miniProject.py
+  * README.md
 
 ## Authors
 * KitsuneHorizon (Shayra Amador)
@@ -22,4 +30,5 @@ Currently, our goal is to expand on what was completed for the project in Spring
 * ryanjeakins (Ryan Eakins)
 
 ## Acknowledgements
-* Insert acknowledgements here
+* Thank you to Dr. Howard for helping us with this project. 
+* Thank you to the sponsors for providing feedback and information towards the project.
