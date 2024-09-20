@@ -81,6 +81,23 @@ To run the miniProject.py script, follow these steps:
    ```
 3. **User Input Prompts:**
    - The script will prompt you to provide the path to the image directory and the desired output file name.
+   - Input validation is performed to ensure the specified image directory exists and the output file name contains valid characters (alphanumeric only).
+
+4. **Expected Output:**
+   * The program generates an Excel file containing:
+     * Images processed from the specified directory
+     * File names
+     * Image dimensions
+     * Formats
+     * Extracted text
+     * Status of Processing (e.g., "OK" for success, "Corrupted" for errors)
+
+5. Error Handling:
+   * The script includes error handling for various scenarios, such as:
+     * Image files that cannot be opened or processed
+     * Permission issues when accessing the directory
+     * Existing output files, prompting for overwrite or new name
+   * Users will receive feedback in the terminal for any issues encountered during execution. 
 
 ## Authors
 * KitsuneHorizon (Shayra Amador)
