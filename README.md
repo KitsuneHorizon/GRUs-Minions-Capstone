@@ -4,7 +4,10 @@ This repository is dedicated to Team GRU's collaborative efforts in researching 
 ## Table of Contents
 - [Description](#description)
 - [Getting Started](#getting-started)
-- [Executing Program](#executing-program)
+  - [Repository Directory](#repository-directory)
+  - [Dependencies](#dependencies)
+  - [Installing](#installing)
+  - [Executing Program](#executing-program)
 - [Authors](#authors)
 - [Acknowledgements](#acknowledgements)
 - [Future Work](#future-work)
