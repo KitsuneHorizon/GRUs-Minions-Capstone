@@ -2,7 +2,7 @@
 This repository is dedicated to Team GRU's collaborative efforts in researching and developing solutions for the Fentanyl Epidemic OCR/NLP Project. Our focus is to use Optical Character Recognition (OCR) and Natural Language Processing (NLP) techniques to analyze data related to the fentanyl epidemic, with the goal of providing valuable insights and improving data extraction methods.
 
 ## Description
-Our goal is to build upon the work completed during the Spring 2024 phase of the project. Team GRU's Minions are tasked with developing solutions to automate the extraction of entities from images and the processing of unstructured text. This will reduce manual effort and minimize errors in handling complex data. Additionally, we aim to fully leverage the evidence and data sources from Spring 2024, which were not entirely utilized in the previous phase
+Our goal is to build upon the work completed during the Spring 2024 phase of the project. Team GRU's Minions are tasked with developing solutions to automate the extraction of entities from images and the processing of unstructured text. This will reduce manual effort and minimize errors in handling complex data. Additionally, we aim to fully leverage the evidence and data sources from Spring 2024, which were not entirely utilized in the previous phase.
 
 ## Getting Started
 ### Repository Directory
@@ -51,7 +51,7 @@ Ensure that the following dependencies are installed before running the project:
      ```
      * Clone the repository using HTTPS or SSH: 
      ```bash
-     git clone <Insert HTTPS/SSH link here
+     git clone <Insert HTTPS/SSH link here>
      ```
      
 2. Using GitHub Desktop:
