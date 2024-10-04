@@ -29,7 +29,22 @@ Our goal is to build upon the work completed during the Spring 2024 phase of the
 
   * **miniProject.py**  
     Python script responsible for processing images using OCR, extracting text, and saving the results to an Excel file.
-    
+  
+  * **EasyOCR.py**  
+    Script that utilizes the EasyOCR library to perform Optical Character Recognition (OCR) on images. It allows for text extraction with minimal setup.
+
+  * **Pillow_preprocessing.py**  
+    This script uses the Pillow library for image preprocessing, such as sharpening and enhancing images before performing OCR.
+
+  * **PyTesseract OCR for GRU Minions with NumPy (OpenCV).py**  
+    Python script combining Tesseract OCR and NumPy/OpenCV for advanced image preprocessing and text extraction.
+  
+ * **PyTesseract OCR for GRU Minions with Scikit-Image Features.py**  
+    A script that leverages Tesseract OCR with Scikit-Image features to manipulate images and improve text extraction.
+
+  * **pyTorch.py**  
+    This script demonstrates the use of PyTorch for image manipulation, aiming to sharpen images and enhance the quality of text extraction via OCR.
+  
      _Additional Python scripts will be developed and added as the project progresses._
 
 ### Dependencies
