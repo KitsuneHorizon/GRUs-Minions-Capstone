@@ -68,6 +68,44 @@ Ensure that the following dependencies are installed before running the project:
      pip install openpyxl==3.0.0
      ```
 
+3. **Libraries for NLP:**
+   * **pandas**  
+     Install via pip:
+     ```bash
+     pip install pandas
+     ```
+   
+   * **nltk**  
+     Install via pip:
+     ```bash
+     pip install nltk
+     ```
+     Additionally, ensure you download the necessary nltk resources:
+     ```bash
+     python -m nltk.downloader punkt stopwords
+     ```
+
+   * **collections.Counter**  
+     This is part of Python's standard library, so no installation is needed.
+
+   * **wordcloud**  
+     Install via pip:
+     ```bash
+     pip install wordcloud
+     ```
+
+   * **matplotlib**  
+     Install via pip:
+     ```bash
+     pip install matplotlib
+     ```
+
+   * **re**  
+     This is part of Python's standard library, so no installation is needed.
+
+   * **unicodedata**  
+     This is part of Python's standard library, so no installation is needed.
+
 ### Installing
 1. Clone the Repository
    * Using the terminal:
