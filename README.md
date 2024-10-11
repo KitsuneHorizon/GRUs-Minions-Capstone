@@ -105,6 +105,16 @@ Ensure that the following dependencies are installed before running the project:
 
    * **unicodedata**  
      This is part of Python's standard library, so no installation is needed.
+   
+   * **googletrans**  
+     Install via pip:
+     ```bash
+     pip install googletrans==4.0.0-rc1
+     ```
+
+   To use `Translator` from `googletrans`:
+   ```python
+   from googletrans import Translator
 
 ### Installing
 1. Clone the Repository
