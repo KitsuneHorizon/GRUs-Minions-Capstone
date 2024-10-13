@@ -45,6 +45,15 @@ Our goal is to build upon the work completed during the Spring 2024 phase of the
   * **pyTorch.py**  
     This script demonstrates the use of PyTorch for image manipulation, aiming to sharpen images and enhance the quality of text extraction via OCR.
   
+  * **NLP_test.ipynb**  
+    Jupyter notebook used to experiment with various NLP techniques such as tokenization, named entity recognition (NER), and more. This is an interactive environment for exploring text analysis workflows.
+
+  * **NLP_Test.py**  
+    Python script that automates the NLP processes from `NLP_test.ipynb` and is designed for larger datasets. It performs tasks such as tokenization, stopword removal, and NER for unstructured text data.
+
+  * **Translate Team 1.py**  
+    Script that handles the translation of text from Chinese to English using the `googletrans` package. It's part of the preprocessing step for multilingual text sources.
+  
      _Additional Python scripts will be developed and added as the project progresses._
 
 ### Dependencies
@@ -151,8 +160,24 @@ To run the miniProject.py script, follow these steps:
    ```
    * Execute the script by running the following command:
    ```bash
+   python NLP_Test.py
+   ```
+   ```bash
+   python EasyOCR.py
+   ```
+   ```bash
+   python KerasOCR.py
+   ```
+   ```bash
    python miniProject.py
    ```
+   ```bash
+   python Pillow_preprocessing.py
+   ```
+   ```bash
+   python pyTorch.py
+   ```
+ 
 3. **User Input Prompts:**
    - The script will prompt you to provide the path to the image directory and the desired output file name.
    - Input validation is performed to ensure the specified image directory exists and the output file name contains valid characters (alphanumeric only).
@@ -175,10 +200,10 @@ To run the miniProject.py script, follow these steps:
 
 ## Authors
 * KitsuneHorizon (Shayra Amador)
+* ryanjeakins (Ryan Eakins)
 * bgriffin (Bethany Griffin)
 * beckyHuck (Rebecca Huck)
 * k-longe (Kristina Longe)
-* ryanjeakins (Ryan Eakins)
 
 ## Acknowledgements
 * **Dr. Howard** – Thank you for your guidance and support throughout the project.
@@ -187,8 +212,8 @@ To run the miniProject.py script, follow these steps:
 ## Future Work
 The project is a work in progress, and the following features or improvements are planned in future iterations:
 
-1. **NLP Pipeline for Text Analysis:**  
-   We will integrate a Natural Language Processing (NLP) pipeline to analyze the extracted text and identify entities related to the fentanyl epidemic.
+1. **Enhancing the NLP Pipeline for Text Analysis:**  
+   The initial NLP pipeline has been implemented to process text and perform tokenization, stopword removal, and Named Entity Recognition (NER). Future work will focus on improving entity extraction accuracy and expanding the pipeline to include sentiment analysis and topic modeling.
 
 2. **Integration with Existing Data Sources:**  
-   We'll integrate data sources from the Spring 2024 phase to maximize insights and ensure consistency in data processing.
+   We'll integrate data sources from the Spring 2024 phase to maximize insights and ensure consistency in data processing. Additionally, we will continue refining the data cleaning and processing techniques to improve overall data quality.
