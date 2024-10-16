@@ -243,6 +243,7 @@ def extract_text_from_images(directory):
     return (data, total_images, images_with_text, images_without_text, failed_extractions, low_confidence_count, spell_errors_count, total_extracted_elements, sharpened_low_confidence_count, sharpened_spell_errors_count, total_sharpened_extracted_elements, average_confidence, average_sharpened_confidence, english_texts, mandarin_texts, original_texts)
 
 # Function to save images and text to Excel
+# Function to save images and text to Excel
 def save_to_excel(directory, data, excel_filename):
     # Create a workbook and select the active worksheet
     wb = Workbook()
@@ -263,11 +264,13 @@ def save_to_excel(directory, data, excel_filename):
     ws.column_dimensions['K'].width = 50  # Sharpened Text Without Misspelled Words
     ws.column_dimensions['L'].width = 50  # Added Words
     ws.column_dimensions['M'].width = 50  # Removed Words
+    ws.column_dimensions['N'].width = 50  # Mandarin Text from Sharpened Images
 
     # Write headers
     ws.append(["Image", "Image Name", "Extracted Text", "Avg Confidence", "Verification Status", "Misspelled Words",
-               "Sharpened Extracted Text", "Sharpened Avg Confidence", "Sharpened Verification Status", "Sharpened Misspelled Words",
-               "Sharpened Text Without Misspelled Words", "Added Words", "Removed Words"])
+               "Sharpened Extracted Text", "Sharpened Avg Confidence", "Sharpened Verification Status",
+               "Sharpened Misspelled Words",
+               "Sharpened Text Without Misspelled Words", "Added Words", "Removed Words", "Mandarin Text (Sharpened)"])
 
     for i, image_data in enumerate(data, start=2):
         image_path = image_data['file_path']
@@ -298,6 +301,10 @@ def save_to_excel(directory, data, excel_filename):
         ws[f'L{i}'] = image_data.get('added_words', '')
         ws[f'M{i}'] = image_data.get('removed_words', '')
 
+        # Add Mandarin text from sharpened image to column N
+        mandarin_text_sharpened = extract_mandarin_text(image_data.get('sharpened_extracted_text', ''))
+        ws[f'N{i}'] = mandarin_text_sharpened
+
         # Set row height to match the image height
         row_height = 150 * 0.75  # Approximate conversion from pixels to Excel row height
         ws.row_dimensions[i].height = row_height
@@ -306,6 +313,7 @@ def save_to_excel(directory, data, excel_filename):
     excel_path = os.path.join(directory, excel_filename)
     wb.save(excel_path)
     print(f"Data has been successfully exported to {excel_path}")
+
 
 # Function to save text files
 def save_text_files(directory, english_texts, mandarin_texts, original_texts):
