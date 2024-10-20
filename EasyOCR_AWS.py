@@ -27,7 +27,8 @@ for bucket in response['Buckets']:
 print("\n")
 
 # Specify your bucket name
-bucket_name = 'sagemaker-us-east-1-850385020924' #You will need to change
+bucket_name = 'sagemaker-us-east-1-850385020924'
+directory = bucket_name + '/AllImages'
 
 # List all objects in the bucket
 response = s3.list_objects_v2(Bucket=bucket_name)
@@ -52,6 +53,14 @@ def extract_mandarin_text(text):
     # Extract Mandarin characters
     mandarin_characters = re.findall(r'[\u4e00-\u9fff]+', text)
     return ' '.join(mandarin_characters)
+
+def translate_text(text):
+    try:
+        translation = translator.translate(text, src='zh-cn', dest='en')
+        return translation.text
+    except Exception as e:
+        print(f"Translation error: {e}")
+        return text
 
 # Function to process images and extract text with verification
 def extract_text_from_images(directory):
@@ -87,6 +96,7 @@ def extract_text_from_images(directory):
     english_texts = []
     mandarin_texts = []
     original_texts = []
+    mandarin_translated_texts = []
 
     # Supported image extensions
     supported_extensions = ('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif')
@@ -147,6 +157,7 @@ def extract_text_from_images(directory):
                     mandarin_text = extract_mandarin_text(extracted_text)
                     if mandarin_text:
                         mandarin_texts.append(mandarin_text)
+
 
                 else:
                     images_without_text += 1  # No text found
@@ -209,6 +220,8 @@ def extract_text_from_images(directory):
                     mandarin_text_sharp = extract_mandarin_text(sharpened_extracted_text)
                     if mandarin_text_sharp:
                         mandarin_texts.append(mandarin_text_sharp)
+                        mandarin_translated_text = translate_text(mandarin_text_sharp)
+                        mandarin_translated_texts.append(mandarin_translated_text)
 
                 else:
                     sharpened_extracted_text = "No text found"
@@ -264,7 +277,7 @@ def extract_text_from_images(directory):
     average_sharpened_confidence = total_sharpened_confidence / total_images if total_images > 0 else 0
 
     # Return collected data and stats
-    return (data, total_images, images_with_text, images_without_text, failed_extractions, low_confidence_count, spell_errors_count, total_extracted_elements, sharpened_low_confidence_count, sharpened_spell_errors_count, total_sharpened_extracted_elements, average_confidence, average_sharpened_confidence, english_texts, mandarin_texts, original_texts)
+    return (data, total_images, images_with_text, images_without_text, failed_extractions, low_confidence_count, spell_errors_count, total_extracted_elements, sharpened_low_confidence_count, sharpened_spell_errors_count, total_sharpened_extracted_elements, average_confidence, average_sharpened_confidence, english_texts, mandarin_texts, mandarin_translated_texts, original_texts)
 
 # Function to save images and text to Excel
 # Function to save images and text to Excel
@@ -340,10 +353,11 @@ def save_to_excel(directory, data, excel_filename):
 
 
 # Function to save text files
-def save_text_files(directory, english_texts, mandarin_texts, original_texts):
+def save_text_files(directory, english_texts, mandarin_texts, mandarin_translated_texts, original_texts):
     english_text_file = os.path.join(directory, "english_sharpened_texts.txt")
     mandarin_text_file = os.path.join(directory, "mandarin_texts.txt")
     original_text_file = os.path.join(directory, "original_extracted_texts.txt")
+    mandarin_translated_text_file = os.path.join(directory, "mandarin_translated_texts.txt")
 
     # Save English texts
     with open(english_text_file, 'w', encoding='utf-8') as f:
@@ -356,6 +370,12 @@ def save_text_files(directory, english_texts, mandarin_texts, original_texts):
         for text in mandarin_texts:
             f.write(text + '\n')
     print(f"Mandarin texts saved to {mandarin_text_file}")
+
+    #Save Translated texts
+    with open(mandarin_translated_text_file, 'w', encoding='utf-8') as f:
+        for text in mandarin_translated_texts:
+            f.write(text + '\n')
+    print(f"Mandarin tranlsated texts saved to {mandarin_translated_text_file}")
 
     # Save original extracted texts
     with open(original_text_file, 'w', encoding='utf-8') as f:
@@ -390,11 +410,11 @@ def main():
     start_time = time.time()
 
     # Ask the user for the directory of images
-    directory = input("Enter the directory of your images: ").strip()
-
-    if not os.path.isdir(directory):
-        print("Invalid directory. Please try again.")
-        return
+    # directory = input("Enter the directory of your images: ").strip()
+    #
+    # if not os.path.isdir(directory):
+    #     print("Invalid directory. Please try again.")
+    #     return
 
     # Ask the user for the excel file name
     excel_filename = input("Enter the name of your Excel file (without extension): ").strip()
@@ -421,12 +441,13 @@ def main():
     english_texts = result[13]
     mandarin_texts = result[14]
     original_texts = result[15]
+    mandarin_translated_texts = result[16]
 
     # Save data to Excel
     save_to_excel(directory, data, excel_filename)
 
     # Save text files
-    save_text_files(directory, english_texts, mandarin_texts, original_texts)
+    save_text_files(directory, english_texts, mandarin_texts, mandarin_translated_texts, original_texts)
 
     # End the timer
     end_time = time.time()
