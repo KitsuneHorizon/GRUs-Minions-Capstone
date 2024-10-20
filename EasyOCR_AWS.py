@@ -16,6 +16,7 @@ from io import StringIO
 
 # Create an S3 client
 s3 = boto3.client('s3')
+s3_1 = boto3.resource('s3')
 
 # List all buckets
 response = s3.list_buckets()
@@ -102,7 +103,7 @@ def extract_text_from_images(directory):
     supported_extensions = ('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif')
 
     # Loop through the directory with tqdm progress bar
-    for filename in tqdm(os.listdir(directory), desc="Processing Images", unit="image"):
+    for filename in tqdm((directory), desc="Processing Images", unit="image"):
         if filename.lower().endswith(supported_extensions):
             total_images += 1  # Count total images
             file_path = os.path.join(directory, filename)
@@ -302,6 +303,7 @@ def save_to_excel(directory, data, excel_filename):
     ws.column_dimensions['L'].width = 50  # Added Words
     ws.column_dimensions['M'].width = 50  # Removed Words
     ws.column_dimensions['N'].width = 50  # Mandarin Text from Sharpened Images
+    ws.column_dimensions['O'].width = 50  # Mandarin Translated Text
 
     # Write headers
     ws.append(["Image", "Image Name", "Extracted Text", "Avg Confidence", "Verification Status", "Misspelled Words",
@@ -341,13 +343,17 @@ def save_to_excel(directory, data, excel_filename):
         # Add Mandarin text from sharpened image to column N
         mandarin_text_sharpened = extract_mandarin_text(image_data.get('sharpened_extracted_text', ''))
         ws[f'N{i}'] = mandarin_text_sharpened
+        ws[f'O{i}'] = mandarin_translated_text
 
         # Set row height to match the image height
         row_height = 150 * 0.75  # Approximate conversion from pixels to Excel row height
         ws.row_dimensions[i].height = row_height
 
     # Save the Excel file in the images directory
-    s3.Bucket(bucket_name).upload_file(excel_filename, bucket_name)
+    #s3_1.Bucket(bucket_name).upload_file('OCR_Results.xlsx', 'OCR_Results.xlsx')
+    print(excel_filename)
+    #s3.upload_file(excel_filename, bucket_name, 'OCR_Results.xlsx')
+    s3.put_object(Body=excel_filename, Bucket = bucket_name, Key = excel_filename)
     print(f"Data has been successfully exported")
 
 
