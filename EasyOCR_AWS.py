@@ -28,7 +28,7 @@ print("\n")
 
 # Specify your bucket name
 bucket_name = 'sagemaker-us-east-1-850385020924'
-directory = bucket_name + '/AllImages'
+directory = bucket_name
 
 # List all objects in the bucket
 response = s3.list_objects_v2(Bucket=bucket_name)
@@ -347,9 +347,8 @@ def save_to_excel(directory, data, excel_filename):
         ws.row_dimensions[i].height = row_height
 
     # Save the Excel file in the images directory
-    excel_path = os.path.join(directory, excel_filename)
-    wb.save(excel_path)
-    print(f"Data has been successfully exported to {excel_path}")
+    s3.Bucket(bucket_name).upload_file(excel_filename, bucket_name)
+    print(f"Data has been successfully exported")
 
 
 # Function to save text files
@@ -447,14 +446,14 @@ def main():
     save_to_excel(directory, data, excel_filename)
 
     # Save text files
-    save_text_files(directory, english_texts, mandarin_texts, mandarin_translated_texts, original_texts)
+   # save_text_files(directory, english_texts, mandarin_texts, mandarin_translated_texts, original_texts)
 
     # End the timer
     end_time = time.time()
     time_taken = end_time - start_time
 
     # Generate stats report
-    generate_stats_report(directory, total_images, images_with_text, images_without_text, failed_extractions, time_taken, low_confidence_count, spell_errors_count, total_extracted_elements, sharpened_low_confidence_count, sharpened_spell_errors_count, total_sharpened_extracted_elements, average_confidence, average_sharpened_confidence)
+    #generate_stats_report(directory, total_images, images_with_text, images_without_text, failed_extractions, time_taken, low_confidence_count, spell_errors_count, total_extracted_elements, sharpened_low_confidence_count, sharpened_spell_errors_count, total_sharpened_extracted_elements, average_confidence, average_sharpened_confidence)
 
 if __name__ == "__main__":
     main()
